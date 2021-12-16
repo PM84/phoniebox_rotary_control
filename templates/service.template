@@ -1,0 +1,12 @@
+[Unit]
+Description=Phoniebox Rotary Control Service
+DefaultDependencies=false
+
+[Service]
+Type=simple
+WorkingDirectory=<PATH>/scripts/
+ExecStart=/usr/bin/python3 <PATH>/scripts/./phoniebox_rotary_control.py
+RestartSec=2
+[Install]
+WantedBy=multi-user.target
+
