@@ -1,7 +1,7 @@
 #!/bin/bash
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
-#Version: 1.0.4 - 20211216
+#Version: 1.0.5 - 20211216
 #branch="development"
 repo="https://github.com/splitti/phoniebox_rotary_control"
 branch="main"
@@ -96,8 +96,8 @@ sudo chown root:root /etc/systemd/phoniebox_rotary_control.service > /dev/null 2
 sudo chmod 644 /etc/systemd/phoniebox_rotary_control.service > /dev/null 2>&1
 sudo sed -i -e "s:<PATH>:${installPath}:g" /etc/systemd/phoniebox_rotary_control.service > /dev/null
 sudo systemctl daemon-reload #> /dev/null 2>&1
-sudo systemctl enable /etc/systemd/phoniebox_rotary_control.service #> /dev/null 2>&1
-sudo service phoniebox_rotary_control restart #> /dev/null 2>&1
+sudo systemctl enable /etc/systemd/phoniebox_rotary_control.service > /dev/null 2>&1
+sudo service phoniebox_rotary_control restart > /dev/null 2>&1
 echo -e "${green}Done${nocolor}"
 echo -e ""
 echo -e ""
