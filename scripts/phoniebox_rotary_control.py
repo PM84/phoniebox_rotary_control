@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
+# -*- coding: iso-8859-15 -*-
 
 import os
 from RPi import GPIO
