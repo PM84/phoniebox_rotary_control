@@ -1,5 +1,5 @@
 Date: 16.12.2021
-Version: 1.0.0 - 20211216
+Version: 1.0.1 - 20211216
 
 # phoniebox_rotary_control
 phoniebox_rotary_control
@@ -14,3 +14,4 @@ Tested with these rotary knobs (affiliate Link): <a href="https://amzn.to/33v1UT
 ## Changelog
 - 16.12.2021
   - Added Installer
+  - Bug fixing
