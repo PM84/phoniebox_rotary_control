@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: iso-8859-15 -*-
-# 1.0.13
+# 1.0.14
 
 import os
 from RPi import GPIO
@@ -46,7 +46,7 @@ def clkClicked(channel):
         counter = int(os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=getvolume").read())
         counter = counter + step
         if counter > 100: counter = 100
-            os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=setvolume -v="+str(counter))
+        os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=setvolume -v="+str(counter))
             #print ("Counter ", counter)
  
 def dtClicked(channel):
