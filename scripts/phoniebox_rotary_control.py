@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: iso-8859-15 -*-
-# 1.0.15
+# 1.0.16
 
 import os
 from RPi import GPIO
@@ -71,8 +71,8 @@ def swClicked(channel):
         #os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=playerpause")
     if paused == False : 
         bootvol = os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=getbootvolume").read()
-        os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=setvolume -v="+str(bootvol))
-        #os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=playerplay")
+        os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=setvolume -v="+str(bootvol))
+        #os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=playerplay")
     #print ("Paused ", paused)
 
 #print ("Initial clk:", clkLastState)
@@ -85,6 +85,6 @@ GPIO.add_event_detect(clk, GPIO.FALLING, callback=clkClicked, bouncetime=300)
 GPIO.add_event_detect(dt, GPIO.FALLING, callback=dtClicked, bouncetime=300)
 GPIO.add_event_detect(sw, GPIO.FALLING, callback=swClicked, bouncetime=300)
  
-#input("Start monitoring input")
+input("Start monitoring input")
  
 GPIO.cleanup()
