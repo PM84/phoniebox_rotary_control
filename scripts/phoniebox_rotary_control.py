@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 # -*- coding: iso-8859-15 -*-
-# 1.0.8
+# 1.0.11
 
 import os
 from RPi import GPIO
  
-print ("Started")
+#print ("Started")
 
 os.system('clear') #clear screen, this is just for the OCD purposes
  
@@ -47,7 +47,7 @@ def clkClicked(channel):
                 counter = counter + step
                 if counter > 100: counter = 100
                 os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=setvolume -v="+str(counter))
-                print ("Counter ", counter)
+                #print ("Counter ", counter)
  
 def dtClicked(channel):
         global counter
@@ -61,7 +61,7 @@ def dtClicked(channel):
                 counter = counter - step
                 if counter < 0: counter = 0
                 os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=setvolume -v="+str(counter))
-                print ("Counter ", counter)
+                #print ("Counter ", counter)
  
 def swClicked(channel):
         global paused
@@ -73,12 +73,12 @@ def swClicked(channel):
               bootvol = os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=getbootvolume").read()
               os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=setvolume -v="+str(bootvol))
 #              os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=playerplay")
-        print ("Paused ", paused)
+        #print ("Paused ", paused)
 
-print ("Initial clk:", clkLastState)
-print ("Initial dt:", dtLastState)
-print ("Initial sw:", swLastState)
-print ("=========================================")
+#print ("Initial clk:", clkLastState)
+#print ("Initial dt:", dtLastState)
+#print ("Initial sw:", swLastState)
+#print ("=========================================")
  
 #set up the interrupts
 GPIO.add_event_detect(clk, GPIO.FALLING, callback=clkClicked, bouncetime=300)
