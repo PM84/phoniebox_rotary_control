@@ -26,7 +26,7 @@ echo -e "///${cyan}      | |_ / _ \| '__| | |_) | '_ \ / _ \| '_ \| |/ _ \ '_ \ 
 echo -e "///${cyan}      |  _| (_) | |    |  __/| | | | (_) | | | | |  __/ |_) | (_) >  <           ${nocolor}///";
 echo -e "///${cyan}      |_|  \___/|_|    |_|   |_| |_|\___/|_| |_|_|\___|_.__/ \___/_/\_\          ${nocolor}///";
 echo -e "///${cyan}                                                                                 ${nocolor}///";
-echo -e "///${green}                            developed by Peter Mayer                            ${nocolor}///";                                                                    
+echo -e "///${green}                          developed by Peter Mayer                               ${nocolor}///";                                                                    
 echo -e "///${cyan}                                                                                 ${nocolor}///";
 echo -e "///////////////////////////////////////////////////////////////////////////////////////"
 echo -e "///                                                                                 ///"
