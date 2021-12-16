@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: iso-8859-15 -*-
+# 1.0.8
 
 import os
 from RPi import GPIO
