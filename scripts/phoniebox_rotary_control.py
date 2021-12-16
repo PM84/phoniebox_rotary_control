@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: iso-8859-15 -*-
-# 1.0.16
+# 1.0.17
 
 import os
 from RPi import GPIO
@@ -85,6 +85,6 @@ GPIO.add_event_detect(clk, GPIO.FALLING, callback=clkClicked, bouncetime=300)
 GPIO.add_event_detect(dt, GPIO.FALLING, callback=dtClicked, bouncetime=300)
 GPIO.add_event_detect(sw, GPIO.FALLING, callback=swClicked, bouncetime=300)
  
-input("Start monitoring input")
+input("")
  
 GPIO.cleanup()
