@@ -1,7 +1,7 @@
 #!/bin/bash
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
-#Version: 1.0.1 - 20211216
+#Version: 1.0.2 - 20211216
 #branch="development"
 repo="https://github.com/splitti/phoniebox_rotary_control"
 branch="master"
@@ -85,7 +85,7 @@ echo -e "${green}Done${nocolor}"
 echo -e ""
 echo -e -n "   --> Clone phoniebox_rotary_control Repository:   "
 
-git clone ${repo} --branch ${branch} ${installPath} > /dev/null 2>&1
+git clone ${repo} --branch ${branch} ${installPath} # > /dev/null 2>&1
 echo -e "${green}Done${nocolor}"
 echo -e ""
 echo -e -n "   --> Installing Service:                "
