@@ -1,7 +1,7 @@
 #!/bin/bash
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
-#Version: 1.0.8 - 20211216
+#Version: 1.0.9 - 20211216
 #branch="development"
 repo="https://github.com/splitti/phoniebox_rotary_control"
 branch="main"
@@ -90,7 +90,7 @@ echo -e "${green}Done${nocolor}"
 echo -e ""
 echo -e -n "   --> Installing Service:                "
 sudo chown -R pi:pi ${installPath} > /dev/null
-#sudo chmod +x ${installPath}/oled_phoniebox.py > /dev/null
+sudo chmod +x ${installPath}/scripts/phoniebox_rotary_control.py> /dev/null
 sudo cp ${installPath}/templates/service.template /etc/systemd/system/phoniebox-rotary-control.service > /dev/null
 sudo chown root:root /etc/systemd/system/phoniebox-rotary-control.service > /dev/null 2>&1
 sudo chmod 644 /etc/systemd/system/phoniebox-rotary-control.service > /dev/null 2>&1
