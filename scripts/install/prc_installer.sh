@@ -27,7 +27,7 @@ echo -e "///${cyan}      | |_ / _ \| '__| | |_) | '_ \ / _ \| '_ \| |/ _ \ '_ \ 
 echo -e "///${cyan}      |  _| (_) | |    |  __/| | | | (_) | | | | |  __/ |_) | (_) >  <           ${nocolor}///";
 echo -e "///${cyan}      |_|  \___/|_|    |_|   |_| |_|\___/|_| |_|_|\___|_.__/ \___/_/\_\          ${nocolor}///";
 echo -e "///${cyan}                                                                                 ${nocolor}///";
-echo -e "///${green}                          developed by Peter Mayer                               ${nocolor}///";                                                                    
+echo -e "///${green}                 developed by Peter Mayer & Olaf Splitt                         ${nocolor}///";                                                                    
 echo -e "///${cyan}                                                                                 ${nocolor}///";
 echo -e "///////////////////////////////////////////////////////////////////////////////////////"
 echo -e "///                                                                                 ///"
@@ -37,7 +37,7 @@ echo -e "///                                                                    
 echo -e "///////////////////////////////////////////////////////////////////////////////////////"
 echo -e ""
 echo -e "${red}Please notice:${nocolor} This script will install or remove the rotary control for phoniebox"
-echo -e "by Peter Mayer."
+echo -e "by Peter Mayer and Olaf Splitt."
 echo -e " "
 if [ -d "/home/pi/RPi-Jukebox-RFID" ]; then
 	echo -e "${green}RPi-Jukebox-RFID seems to be installed${nocolor}"
@@ -82,8 +82,9 @@ sudo systemctl disable /etc/systemd/phoniebox_rotary_control.service > /dev/null
 sudo rm /etc/systemd/phoniebox_rotary_control.service > /dev/null 2>&1
 echo -e "${green}done${nocolor}"
 echo -e -n "   --> Remove config-entries:     "
-sudo sed -i '/dtoverlay=rotary-encoder/c\' /boot/config.txt
-sudo sed -i '/dtoverlay=gpio-key/c\' /boot/config.txt
+sudo sed -i '/# enable rotary encoder/c\' /boot/config.txt > /dev/null 2>&1
+sudo sed -i '/dtoverlay=rotary-encoder/c\' /boot/config.txt  > /dev/null 2>&1
+sudo sed -i '/dtoverlay=gpio-key/c\' /boot/config.txt  > /dev/null 2>&1
 echo -e "${green}done${nocolor}"
 echo -e -n "   --> Delete Repository:         "
 sudo rm -R ${installPath} > /dev/null 2>&1
@@ -164,16 +165,24 @@ for p in ${lumaPackages[@]}; do
 		echo -e "${green}already installed${nocolor}"
 	fi
 done
-
-echo -e -n "   --> Adding config-entries:   "
-echo 'dtoverlay=rotary-encoder,pin_a=23,pin_b=24,relative_axis=1' | sudo tee -a /boot/config.txt > /dev/null 2>&1
-echo 'dtoverlay=gpio-key,gpio=22,keycode=28,label="ENTER"' | sudo tee -a /boot/config.txt > /dev/null 2>&1
-echo -e "${green}done${nocolor}"
-
 echo -e ""
 read -n 1 -s -r -p "Press any key to continue"
 
-
+clear
+echo -e "///////////////////////////////////////////////////////////////////////////"
+echo -e "///${cyan}   Set GPIO settings:                                                ${nocolor}///"
+echo -e "///////////////////////////////////////////////////////////////////////////"
+echo -e ""
+echo -e "${red}Please notice:${nocolor} This step asks for the settings of the GPIOs"
+echo -e "of your Phoniebox, not the physical PIN!!!"
+echo -e ""
+echo -e "Adjust these values to your needs:"
+echo -e ""
+read -rp "  ---> Type sw-GPIO:  " swgpio
+read -rp "  ---> Type sk-GPIO:  " skgpio
+read -rp "  ---> Type dt-GPIO:  " dtgpio
+echo -e ""
+read -n 1 -s -r -p "Press any key to continue"
 
 clear
 echo -e "///////////////////////////////////////////////////////////////////////////"
@@ -184,13 +193,19 @@ echo -e "Repository:       ${green}${repo}${nocolor}"
 echo -e "Branch:           ${green}${branch}${nocolor}"
 echo -e "Install Path:     ${green}${installPath}${nocolor}"
 echo -e ""
-echo -e "   Installing Service:                "
+echo -e ""
+echo -e "   Installing Service:"
 echo -e "   -------------------------------------------------------------------------"
-echo -e -n "   --> Clone Rotary Repository:           "
+echo -e -n "   --> Adding config-entries:     "
+echo '# enable rotary encoder' | sudo tee -a /boot/config.txt > /dev/null 2>&1
+echo 'dtoverlay=rotary-encoder,pin_a=23,pin_b=24,relative_axis=1' | sudo tee -a /boot/config.txt > /dev/null 2>&1
+echo 'dtoverlay=gpio-key,gpio=22,keycode=28,label="ENTER"' | sudo tee -a /boot/config.txt > /dev/null 2>&1
+echo -e "${green}done${nocolor}"
+echo -e -n "   --> Clone Rotary Repository:   "
 git clone ${repo} --branch ${branch} ${installPath} > /dev/null 2>&1
 echo -e "${green}Done${nocolor}"
-echo -e -n "   --> Installing Service:                "
-sudo chown -R pi:pi ${installPath} > /dev/null  2>&1
+echo -e -n "   --> Installing Service:        "
+sudo chown -R pi:pi ${installPath} > /dev/null 2>&1
 sudo chmod +x ${installPath}/scripts/phoniebox_rotary_control.py> /dev/null
 sudo cp ${installPath}/templates/service.template /etc/systemd/system/phoniebox-rotary-control.service > /dev/null
 sudo chown root:root /etc/systemd/system/phoniebox-rotary-control.service > /dev/null 2>&1
@@ -198,7 +213,7 @@ sudo chmod 644 /etc/systemd/system/phoniebox-rotary-control.service > /dev/null 
 sudo sed -i -e "s:<PATH>:${installPath}:g" /etc/systemd/system/phoniebox-rotary-control.service > /dev/null
 sudo systemctl daemon-reload > /dev/null 2>&1
 sudo systemctl enable /etc/systemd/system/phoniebox-rotary-control.service > /dev/null 2>&1
-sudo service phoniebox-rotary-control restart > /dev/null 2>&1
+sudo service phoniebox-rotary-control start > /dev/null 2>&1
 echo -e "${green}Done${nocolor}"
 echo -e ""
 echo -e ""
