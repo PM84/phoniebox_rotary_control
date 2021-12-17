@@ -27,7 +27,7 @@ echo -e "///${cyan}      | |_ / _ \| '__| | |_) | '_ \ / _ \| '_ \| |/ _ \ '_ \ 
 echo -e "///${cyan}      |  _| (_) | |    |  __/| | | | (_) | | | | |  __/ |_) | (_) >  <           ${nocolor}///";
 echo -e "///${cyan}      |_|  \___/|_|    |_|   |_| |_|\___/|_| |_|_|\___|_.__/ \___/_/\_\          ${nocolor}///";
 echo -e "///${cyan}                                                                                 ${nocolor}///";
-echo -e "///${green}                 developed by Peter Mayer & Olaf Splitt                         ${nocolor}///";                                                                    
+echo -e "///${green}                    developed by Peter Mayer & splitti                           ${nocolor}///";                                                                    
 echo -e "///${cyan}                                                                                 ${nocolor}///";
 echo -e "///////////////////////////////////////////////////////////////////////////////////////"
 echo -e "///                                                                                 ///"
@@ -37,7 +37,7 @@ echo -e "///                                                                    
 echo -e "///////////////////////////////////////////////////////////////////////////////////////"
 echo -e ""
 echo -e "${red}Please notice:${nocolor} This script will install or remove the rotary control for phoniebox"
-echo -e "by Peter Mayer and Olaf Splitt."
+echo -e "by Peter Mayer and splitti."
 echo -e " "
 if [ -d "/home/pi/RPi-Jukebox-RFID" ]; then
 	echo -e "${green}RPi-Jukebox-RFID seems to be installed${nocolor}"
@@ -178,9 +178,9 @@ echo -e "of your Phoniebox, not the physical PIN!!!"
 echo -e ""
 echo -e "Adjust these values to your needs:"
 echo -e ""
-read -rp "  ---> Type sw-GPIO:  " swgpio
-read -rp "  ---> Type sk-GPIO:  " skgpio
-read -rp "  ---> Type dt-GPIO:  " dtgpio
+read -rp "  ---> Type CLK-GPIO:  " clkgpio
+read -rp "  ---> Type SK-GPIO:   " skgpio
+read -rp "  ---> Type DT-GPIO:   " dtgpio
 echo -e ""
 read -n 1 -s -r -p "Press any key to continue"
 
@@ -192,19 +192,22 @@ echo -e ""
 echo -e "Repository:       ${green}${repo}${nocolor}"
 echo -e "Branch:           ${green}${branch}${nocolor}"
 echo -e "Install Path:     ${green}${installPath}${nocolor}"
+echo -e "GPIO CLK:         ${green}${clkgpio}${nocolor}"
+echo -e "GPIO SK:          ${green}${skgpio}${nocolor}"
+echo -e "GPIO DT:          ${green}${dtgpio}${nocolor}"
 echo -e ""
 echo -e ""
 echo -e "   Installing Service:"
-echo -e "   -------------------------------------------------------------------------"
-echo -e -n "   --> Adding config-entries:     "
+echo -e "   --------------------------------------------------"
+echo -e -n "   --> Adding config-entries:        "
 echo '# enable rotary encoder' | sudo tee -a /boot/config.txt > /dev/null 2>&1
 echo 'dtoverlay=rotary-encoder,pin_a=23,pin_b=24,relative_axis=1' | sudo tee -a /boot/config.txt > /dev/null 2>&1
 echo 'dtoverlay=gpio-key,gpio=22,keycode=28,label="ENTER"' | sudo tee -a /boot/config.txt > /dev/null 2>&1
 echo -e "${green}done${nocolor}"
-echo -e -n "   --> Clone Rotary Repository:   "
+echo -e -n "   --> Clone Rotary Repository:      "
 git clone ${repo} --branch ${branch} ${installPath} > /dev/null 2>&1
-echo -e "${green}Done${nocolor}"
-echo -e -n "   --> Installing Service:        "
+echo -e "${green}done${nocolor}"
+echo -e -n "   --> Installing Service:           "
 sudo chown -R pi:pi ${installPath} > /dev/null 2>&1
 sudo chmod +x ${installPath}/scripts/phoniebox_rotary_control.py> /dev/null
 sudo cp ${installPath}/templates/service.template /etc/systemd/system/phoniebox-rotary-control.service > /dev/null
@@ -214,10 +217,11 @@ sudo sed -i -e "s:<PATH>:${installPath}:g" /etc/systemd/system/phoniebox-rotary-
 sudo systemctl daemon-reload > /dev/null 2>&1
 sudo systemctl enable /etc/systemd/system/phoniebox-rotary-control.service > /dev/null 2>&1
 sudo service phoniebox-rotary-control start > /dev/null 2>&1
-echo -e "${green}Done${nocolor}"
+echo -e "${green}done${nocolor}"
 echo -e ""
 echo -e ""
 echo -e "${green}Installation finished${nocolor}"
+echo -e ""
 echo -e "If this is a fresh installation, a reboot is recommend..."
 echo -e ""
 echo -e "Do you want to reboot now?"
