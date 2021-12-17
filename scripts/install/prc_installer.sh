@@ -1,7 +1,7 @@
 #!/bin/bash
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
-#Version: 1.1.17 - 20211218
+#Version: 1.2.0 - 20211218
 #branch="development"
 repo="https://github.com/splitti/phoniebox_rotary_control"
 branch="main"
@@ -169,23 +169,57 @@ done
 echo -e ""
 read -n 1 -s -r -p "Press any key to continue"
 
-clear
-echo -e "///////////////////////////////////////////////////////////////////////////"
-echo -e "///${cyan}   Set GPIO settings:                                                ${nocolor}///"
-echo -e "///////////////////////////////////////////////////////////////////////////"
-echo -e ""
-echo -e "${red}Please notice:${nocolor} This step asks for the settings of the GPIOs"
-echo -e "of your Phoniebox, not the physical PIN!!!"
-echo -e ""
-echo -e "Adjust these values to your needs:"
-echo -e ""
-read -rp "  ---> Type CLK-GPIO:  " clkgpio
-read -rp "  ---> Type SK-GPIO:   " skgpio
-read -rp "  ---> Type DT-GPIO:   " dtgpio
-echo -e ""
-overlay1="dtoverlay=rotary-encoder,pin_a=${skgpio},pin_b=${dtgpio},relative_axis=1"
-overlay2="dtoverlay=gpio-key,gpio=${clkgpio},keycode=28,label=\"ENTER\""
-read -n 1 -s -r -p "Press any key to continue"
+gpioready=0
+while [ ${gpioready} = 0 ]; do
+	clear
+	echo -e "///////////////////////////////////////////////////////////////////////////"
+	echo -e "///${cyan}   Set GPIO settings:                                                ${nocolor}///"
+	echo -e "///////////////////////////////////////////////////////////////////////////"
+	echo -e ""
+	echo -e "${red}Please notice:${nocolor} This step asks for the settings of the GPIOs"
+	echo -e "of your Phoniebox, not the physical PIN!!!"
+	echo -e ""
+	echo -e "Adjust these values to your needs:"
+	echo -e ""
+	read -rp "  ---> Type CLK-GPIO:  " clkgpio
+	read -rp "  ---> Type SK-GPIO:   " skgpio
+	read -rp "  ---> Type DT-GPIO:   " dtgpio
+	echo -e ""
+	echo -e ""
+	echo -e "The entered values are not checked for correctness!"
+	echo -e ""
+	echo -e "Check your GPIO-Settings:"
+	echo -e "-----------------------------------------------------"
+	echo -e "GPIO CLK:      ${green}${clkgpio}${nocolor}"
+	echo -e "GPIO SK:       ${green}${skgpio}${nocolor}"
+	echo -e "GPIO DT:       ${green}${dtgpio}${nocolor}"
+	echo -e ""
+	options=("GPIO settings are OK" "Let me adjust the settings again" "Quit")
+
+	select opt in "${options[@]}"
+	do
+		case $opt in
+			"GPIO settings are OK")
+				overlay1="dtoverlay=rotary-encoder,pin_a=${skgpio},pin_b=${dtgpio},relative_axis=1"
+				overlay2="dtoverlay=gpio-key,gpio=${clkgpio},keycode=28,label=\"ENTER\""
+				gpioready=1
+				break
+				;;
+
+			"Let me adjust the settings again")
+				gpioready=0
+				break
+				;;
+
+			"Quit")
+				exit
+				;;
+			*) echo -e "invalid option $REPLY";;
+		esac
+	done
+
+done
+
 
 clear
 echo -e "///////////////////////////////////////////////////////////////////////////"
@@ -195,9 +229,6 @@ echo -e ""
 echo -e "Repository:    ${green}${repo}${nocolor}"
 echo -e "Branch:        ${green}${branch}${nocolor}"
 echo -e "Install Path:  ${green}${installPath}${nocolor}"
-echo -e "GPIO CLK:      ${green}${clkgpio}${nocolor}"
-echo -e "GPIO SK:       ${green}${skgpio}${nocolor}"
-echo -e "GPIO DT:       ${green}${dtgpio}${nocolor}"
 echo -e "Overlay 1:     ${green}${overlay1}${nocolor}"
 echo -e "Overlay 2:     ${green}${overlay2}${nocolor}"
 
@@ -236,6 +267,7 @@ select opt in "${options[@]}"
 do
     case $opt in
         "Start")
+			echo -e " "
             sudo service phoniebox-rotary-control start > /dev/null 2>&1
             pid=`ps -ef | grep phoniebox_rotary_control.py | grep -v grep | awk '{print $2}'`  > /dev/null 2>&1
 			if [ -z "${pid}" ]
