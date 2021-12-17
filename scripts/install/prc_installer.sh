@@ -1,7 +1,7 @@
 #!/bin/bash
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
-#Version: 1.1.4 - 20211217
+#Version: 1.1.5 - 20211217
 #branch="development"
 repo="https://github.com/splitti/phoniebox_rotary_control"
 branch="main"
@@ -80,14 +80,14 @@ echo -e -n "   --> Delete Service:            "
 sudo service phoniebox_rotary_control stop > /dev/null 2>&1
 sudo systemctl disable /etc/systemd/phoniebox_rotary_control.service > /dev/null 2>&1
 sudo rm /etc/systemd/phoniebox_rotary_control.service > /dev/null 2>&1
-echo -e "${green}Done${nocolor}"
+echo -e "${green}done${nocolor}"
 echo -e -n "   --> Remove config-entries:     "
 sudo sed -i '/dtoverlay=rotary-encoder/c\' /boot/config.txt
 sudo sed -i '/dtoverlay=gpio-key/c\' /boot/config.txt
-echo -e "${green}Done${nocolor}"
+echo -e "${green}done${nocolor}"
 echo -e -n "   --> Delete Repository:         "
 sudo rm -R ${installPath} > /dev/null 2>&1
-echo -e "${green}Done${nocolor}"
+echo -e "${green}done${nocolor}"
 echo -e ""
 
 if [ "$insttype" = "i" ]
