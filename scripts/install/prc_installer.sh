@@ -88,7 +88,7 @@ sudo rm -R ${installPath} > /dev/null 2>&1
 echo -e "${green}Done${nocolor}"
 echo -e ""
 
-if [ "$inst_type" = "i" ]
+if [ ${inst_type} = "i" ]
 then
     read -n 1 -s -r -p "Press any key to continue"
 else
