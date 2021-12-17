@@ -1,7 +1,7 @@
 #!/bin/bash
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
-#Version: 1.1.2 - 20211217
+#Version: 1.1.3 - 20211217
 #branch="development"
 repo="https://github.com/splitti/phoniebox_rotary_control"
 branch="main"
