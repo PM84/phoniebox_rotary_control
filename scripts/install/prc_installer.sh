@@ -201,8 +201,8 @@ echo -e "   Installing Service:"
 echo -e "   --------------------------------------------------"
 echo -e -n "   --> Adding config-entries:        "
 echo '# enable rotary encoder' | sudo tee -a /boot/config.txt > /dev/null 2>&1
-echo 'dtoverlay=rotary-encoder,pin_a=23,pin_b=24,relative_axis=1' | sudo tee -a /boot/config.txt > /dev/null 2>&1
-echo 'dtoverlay=gpio-key,gpio=22,keycode=28,label="ENTER"' | sudo tee -a /boot/config.txt > /dev/null 2>&1
+echo 'dtoverlay=rotary-encoder,pin_a=${skgpio},pin_b=${dtgpio},relative_axis=1' | sudo tee -a /boot/config.txt > /dev/null 2>&1
+echo 'dtoverlay=gpio-key,gpio=${clkgpio},keycode=28,label="ENTER"' | sudo tee -a /boot/config.txt > /dev/null 2>&1
 echo -e "${green}done${nocolor}"
 echo -e -n "   --> Clone Rotary Repository:      "
 git clone ${repo} --branch ${branch} ${installPath} > /dev/null 2>&1
