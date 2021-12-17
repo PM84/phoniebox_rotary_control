@@ -184,10 +184,11 @@ echo -e "Repository:       ${green}${repo}${nocolor}"
 echo -e "Branch:           ${green}${branch}${nocolor}"
 echo -e "Install Path:     ${green}${installPath}${nocolor}"
 echo -e ""
+echo -e "   Installing Service:                "
+echo -e "   -------------------------------------------------------------------------"
 echo -e -n "   --> Clone Rotary Repository:           "
 git clone ${repo} --branch ${branch} ${installPath} > /dev/null 2>&1
 echo -e "${green}Done${nocolor}"
-echo -e ""
 echo -e -n "   --> Installing Service:                "
 sudo chown -R pi:pi ${installPath} > /dev/null  2>&1
 sudo chmod +x ${installPath}/scripts/phoniebox_rotary_control.py> /dev/null
