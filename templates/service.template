@@ -1,10 +1,9 @@
-#1.0.21
+#1.0.24
 [Unit]
 Description=Phoniebox Rotary Control Service
 After=network.target iptables.service firewalld.service
 
 [Service]
-Type=simple
 WorkingDirectory=<PATH>/scripts/
 ExecStart=/usr/bin/python3 <PATH>/scripts/./phoniebox_rotary_control.py
 Restart=always
