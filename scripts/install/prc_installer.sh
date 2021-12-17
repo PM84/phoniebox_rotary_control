@@ -183,10 +183,10 @@ for p in ${lumaPackages[@]}; do
 	fi
 done
 
-echo -e -n "   --> Adding config-entries:             "
+echo -e -n "   --> Adding config-entries:   "
 echo 'dtoverlay=rotary-encoder,pin_a=23,pin_b=24,relative_axis=1' | sudo tee -a /boot/config.txt > /dev/null 2>&1
 echo 'dtoverlay=gpio-key,gpio=22,keycode=28,label="ENTER"' | sudo tee -a /boot/config.txt > /dev/null 2>&1
-echo -e "${green}Done${nocolor}"
+echo -e "${green}done${nocolor}"
 
 echo -e ""
 read -n 1 -s -r -p "Press any key to continue"
