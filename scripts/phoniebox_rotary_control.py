@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: iso-8859-15 -*-
-# 1.0.23
+# 1.0.24
 
 import RPi.GPIO as GPIO
-from KY040 import KY040
+from pyky040 import pyky040
 import os, time
  
  
@@ -30,13 +30,13 @@ if __name__ == "__main__":
     
     GPIO.setmode(GPIO.BCM)
     
-    ky040 = KY040(CLOCKPIN, DATAPIN, SWITCHPIN, rotaryChange, switchPressed)
+    pyky040 = pyky040(CLOCKPIN, DATAPIN, SWITCHPIN, rotaryChange, switchPressed)
  
-    ky040.start()
+    pyky040.start()
  
     try:
         while True:
             time.sleep(0.05)
     finally:
-        ky040.stop()
+        pyky040.stop()
         GPIO.cleanup()
