@@ -182,6 +182,8 @@ read -rp "  ---> Type CLK-GPIO:  " clkgpio
 read -rp "  ---> Type SK-GPIO:   " skgpio
 read -rp "  ---> Type DT-GPIO:   " dtgpio
 echo -e ""
+overlay1="dtoverlay=rotary-encoder,pin_a=${skgpio},pin_b=${dtgpio},relative_axis=1"
+overlay2="dtoverlay=gpio-key,gpio=${clkgpio},keycode=28,label=\"ENTER\""
 read -n 1 -s -r -p "Press any key to continue"
 
 clear
@@ -189,12 +191,15 @@ echo -e "///////////////////////////////////////////////////////////////////////
 echo -e "///${cyan}   Installing Service:                                               ${nocolor}///"
 echo -e "///////////////////////////////////////////////////////////////////////////"
 echo -e ""
-echo -e "Repository:       ${green}${repo}${nocolor}"
-echo -e "Branch:           ${green}${branch}${nocolor}"
-echo -e "Install Path:     ${green}${installPath}${nocolor}"
-echo -e "GPIO CLK:         ${green}${clkgpio}${nocolor}"
-echo -e "GPIO SK:          ${green}${skgpio}${nocolor}"
-echo -e "GPIO DT:          ${green}${dtgpio}${nocolor}"
+echo -e "Repository:    ${green}${repo}${nocolor}"
+echo -e "Branch:        ${green}${branch}${nocolor}"
+echo -e "Install Path:  ${green}${installPath}${nocolor}"
+echo -e "GPIO CLK:      ${green}${clkgpio}${nocolor}"
+echo -e "GPIO SK:       ${green}${skgpio}${nocolor}"
+echo -e "GPIO DT:       ${green}${dtgpio}${nocolor}"
+echo -e "Overlay 1:     ${green}${overlay1}${nocolor}"
+echo -e "Overlay 2:     ${green}${overlay2}${nocolor}"
+
 echo -e ""
 echo -e ""
 echo -e "   Installing Service:"
