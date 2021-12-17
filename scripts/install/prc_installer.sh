@@ -104,24 +104,6 @@ echo -e "////////////////////////////////////////////////////////////////////"
 echo -e "///${cyan}   Check/Install Prerequirements:                             ${nocolor}///"
 echo -e "////////////////////////////////////////////////////////////////////"
 echo -e " "
-echo -e "Do you want to start the installation of needed packages?"
-echo -e " "
-options=("Install" "Quit")
-
-select opt in "${options[@]}"
-do
-    case $opt in
-        "Install")
-            break
-            ;;
-
-        "Quit")
-            exit
-            ;;
-        *) echo -e "invalid option $REPLY";;
-    esac
-done
-echo -e ""
 echo -e "Starting installation-process, pleae wait, some"
 echo -e "installation steps take some time..."
 echo -e ""
@@ -202,13 +184,12 @@ echo -e "Repository:       ${green}${repo}${nocolor}"
 echo -e "Branch:           ${green}${branch}${nocolor}"
 echo -e "Install Path:     ${green}${installPath}${nocolor}"
 echo -e ""
-echo -e -n "   --> Install:             "
 echo -e -n "   --> Clone Rotary Repository:           "
 git clone ${repo} --branch ${branch} ${installPath} > /dev/null 2>&1
 echo -e "${green}Done${nocolor}"
 echo -e ""
 echo -e -n "   --> Installing Service:                "
-sudo chown -R pi:pi ${installPath} > /dev/null
+sudo chown -R pi:pi ${installPath} > /dev/null  2>&1
 sudo chmod +x ${installPath}/scripts/phoniebox_rotary_control.py> /dev/null
 sudo cp ${installPath}/templates/service.template /etc/systemd/system/phoniebox-rotary-control.service > /dev/null
 sudo chown root:root /etc/systemd/system/phoniebox-rotary-control.service > /dev/null 2>&1
