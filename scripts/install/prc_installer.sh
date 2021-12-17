@@ -82,6 +82,7 @@ echo -e ""
 echo -e -n "   --> Remove config-entries:             "
 sudo sed -i '/dtoverlay=rotary-encoder/c\' /boot/config.txt
 sudo sed -i '/dtoverlay=gpio-key/c\' /boot/config.txt
+exit
 echo -e "${green}Done${nocolor}"
 echo -e ""
 echo -e -n "   --> Adding config-entries:             "
