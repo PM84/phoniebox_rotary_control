@@ -1,7 +1,7 @@
 #!/bin/bash
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
-#Version: 1.2.3 - 20211218
+#Version: 1.2.4 - 20211218
 #branch="development"
 repo="https://github.com/splitti/phoniebox_rotary_control"
 branch="main"
@@ -36,8 +36,7 @@ echo -e "///${cyan}      Support: https://discord.gg/pNNHUaCSAD                 
 echo -e "///                                                                                 ///"
 echo -e "///////////////////////////////////////////////////////////////////////////////////////"
 echo -e ""
-echo -e "${red}Please notice:${nocolor} This script will install or remove the rotary control for phoniebox"
-echo -e "by Peter Mayer and splitti."
+echo -e "${red}Please notice:${nocolor} This script will install or remove the rotary control for phoniebox."
 echo -e " "
 if [ -d "/home/pi/RPi-Jukebox-RFID" ]; then
 	echo -e "${green}RPi-Jukebox-RFID seems to be installed${nocolor}"
