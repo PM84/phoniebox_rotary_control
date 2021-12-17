@@ -1,90 +1,42 @@
 #!/usr/bin/python3
 # -*- coding: iso-8859-15 -*-
-# 1.0.22
+# 1.0.23
 
-import os
-from RPi import GPIO
+import RPi.GPIO as GPIO
+from KY040 import KY040
+import os, time
  
-#print ("Started")
-
-#os.system('clear') #clear screen, this is just for the OCD purposes
  
-step = 5 #linear steps for increasing/decreasing volume
-paused = False #paused state
+def readVolume():
+    value = int(os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=getvolume").read())
+    return int(value)
+def rotaryChange(direction):
+    volume_step = 5
+    volume = readVolume()
+    if direction == 1:
+        os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=setvolume -v="+str(min(100,max(0,volume + volume_step))))
+    else:
+        os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=setvolume -v="+str(min(100,max(0,volume - volume_step))))
+def switchPressed():
+    os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=mute")
  
-#tell to GPIO library to use logical PIN names/numbers, instead of the physical PIN numbers
-GPIO.setmode(GPIO.BCM) 
  
-#set up the pins we have been using
-clk = 5
-dt = 6
-sw = 13
+if __name__ == "__main__":
  
-#set up the GPIO events on those pins
-GPIO.setup(clk, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(dt, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(sw, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    CLOCKPIN = 5
+    DATAPIN = 6
+    SWITCHPIN = 13
+  
+    
+    GPIO.setmode(GPIO.BCM)
+    
+    ky040 = KY040(CLOCKPIN, DATAPIN, SWITCHPIN, rotaryChange, switchPressed)
  
-#get the initial states
-global counter
-clkLastState = GPIO.input(clk)
-dtLastState = GPIO.input(dt)
-swLastState = GPIO.input(sw)
-
-counter = int(os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=getvolume").read())
-if counter == 0 : counter = os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=getbootvolume").read()
+    ky040.start()
  
-#define functions which will be triggered on pin state changes
-def clkClicked(channel):
-    global counter
-    global step
- 
-    clkState = GPIO.input(clk)
-    dtState = GPIO.input(dt)
- 
-    if clkState == 0 and dtState == 1:
-        counter = int(os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=getvolume").read())
-        counter = counter + step
-        if counter > 100: counter = 100
-        os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=setvolume -v="+str(counter))
-            #print ("Counter ", counter)
- 
-def dtClicked(channel):
-    global counter
-    global step
- 
-    clkState = GPIO.input(clk)
-    dtState = GPIO.input(dt)
-         
-    if clkState == 1 and dtState == 0:
-        counter = int(os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=getvolume").read())
-        counter = counter - step
-        if counter < 0: counter = 0
-        os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=setvolume -v="+str(counter))
-        #print ("Counter ", counter)
- 
-def swClicked(channel):
-    global paused
-    paused = not paused
-    if paused == True : 
-        os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=mute")
-        #os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=playerpause")
-    if paused == False : 
-        bootvol = os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=getbootvolume").read()
-        os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=setvolume -v="+str(bootvol))
-        #os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=playerplay")
-    #print ("Paused ", paused)
-
-#print ("Initial clk:", clkLastState)
-#print ("Initial dt:", dtLastState)
-#print ("Initial sw:", swLastState)
-#print ("=========================================")
- 
-#set up the interrupts
-GPIO.add_event_detect(clk, GPIO.FALLING, callback=clkClicked, bouncetime=300)
-GPIO.add_event_detect(dt, GPIO.FALLING, callback=dtClicked, bouncetime=300)
-GPIO.add_event_detect(sw, GPIO.FALLING, callback=swClicked, bouncetime=300)
- 
-raw_input("")
- 
-GPIO.cleanup()
+    try:
+        while True:
+            time.sleep(0.05)
+    finally:
+        ky040.stop()
+        GPIO.cleanup()
