@@ -74,7 +74,7 @@ echo -e "///////////////////////////////////////////////////////////////////////
 echo -e "///${cyan}   Remove Service:                                                   ${nocolor}///"
 echo -e "///////////////////////////////////////////////////////////////////////////"
 echo -e ""
-echo -e -n "   --> Delete old Service:                "
+echo -e -n "   --> Delete Service:                    "
 sudo service phoniebox_rotary_control stop > /dev/null 2>&1
 sudo systemctl disable /etc/systemd/phoniebox_rotary_control.service > /dev/null 2>&1
 sudo rm /etc/systemd/phoniebox_rotary_control.service > /dev/null 2>&1
@@ -83,12 +83,12 @@ echo -e -n "   --> Remove config-entries:             "
 sudo sed -i '/dtoverlay=rotary-encoder/c\' /boot/config.txt
 sudo sed -i '/dtoverlay=gpio-key/c\' /boot/config.txt
 echo -e "${green}Done${nocolor}"
-echo -e -n "   --> Delete old Repository:             "
+echo -e -n "   --> Delete Repository:                 "
 sudo rm -R ${installPath} > /dev/null 2>&1
 echo -e "${green}Done${nocolor}"
 echo -e ""
 
-if [ "${inst_type}" == "i" ]; then
+if [ "$inst_type" == "i" ]; then
     read -n 1 -s -r -p "Press any key to continue"
 else
 	echo -e "${green}Service successfully removed...${nocolor}"
