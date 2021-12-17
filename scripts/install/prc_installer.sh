@@ -244,7 +244,7 @@ do
 			elif
 				echo -e "${green}Service running with PID ${pid}${nocolor}"
 		    fi
-            break
+		    break
             ;;
         "Quit")
             exit
