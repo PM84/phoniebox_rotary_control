@@ -207,8 +207,8 @@ echo -e "   Installing Service:"
 echo -e "   --------------------------------------------------"
 echo -e -n "   --> Adding config-entries:        "
 echo '# enable rotary encoder' | sudo tee -a /boot/config.txt > /dev/null 2>&1
-echo 'dtoverlay=rotary-encoder,pin_a=${skgpio},pin_b=${dtgpio},relative_axis=1' | sudo tee -a /boot/config.txt > /dev/null 2>&1
-echo 'dtoverlay=gpio-key,gpio=${clkgpio},keycode=28,label="ENTER"' | sudo tee -a /boot/config.txt > /dev/null 2>&1
+echo "${overlay1}" | sudo tee -a /boot/config.txt > /dev/null 2>&1
+echo "${overlay2}" | sudo tee -a /boot/config.txt > /dev/null 2>&1
 echo -e "${green}done${nocolor}"
 echo -e -n "   --> Clone Rotary Repository:      "
 git clone ${repo} --branch ${branch} ${installPath} > /dev/null 2>&1
@@ -228,7 +228,7 @@ echo -e ""
 echo -e ""
 echo -e "${green}Installation finished${nocolor}"
 echo -e ""
-echoecho -e "Do you want to start the service now?"
+echo -e "Do you want to start the service now?"
 echo -e " "
 options=("Start" "Quit")
 
@@ -237,6 +237,8 @@ do
     case $opt in
         "Start")
             sudo service phoniebox-rotary-control start
+            sudo service phoniebox-rotary-control status
+			exit
             ;;
 
         "Quit")
