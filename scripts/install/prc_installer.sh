@@ -89,7 +89,7 @@ sudo rm -R ${installPath} > /dev/null 2>&1
 echo -e "${green}Done${nocolor}"
 echo -e ""
 
-echo ${insttype}
+echo "Insttype: " ${insttype}
 
 if [ "${insttype}" = "i" ]
 then
