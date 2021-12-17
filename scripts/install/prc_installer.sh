@@ -30,22 +30,23 @@ echo -e "///${green}                          developed by Peter Mayer          
 echo -e "///${cyan}                                                                                 ${nocolor}///";
 echo -e "///////////////////////////////////////////////////////////////////////////////////////"
 echo -e "///                                                                                 ///"
-echo -e "///${cyan}      https://github.com/splitti/phoniebox_rotary_control                        ${nocolor}///"
+echo -e "///${cyan}      Github:  https://github.com/splitti/phoniebox_rotary_control               ${nocolor}///"
+echo -e "///${cyan}      Support: https://discord.gg/pNNHUaCSAD                                     ${nocolor}///"
 echo -e "///                                                                                 ///"
 echo -e "///////////////////////////////////////////////////////////////////////////////////////"
 echo -e ""
-echo -e "${red}Please notice:${nocolor} This script will install the rotary control for phoniebox"
+echo -e "${red}Please notice:${nocolor} This script will install or remove the rotary control for phoniebox"
 echo -e "by Peter Mayer."
 echo -e " "
 if [ -d "/home/pi/RPi-Jukebox-RFID" ]; then
 	echo -e "${green}RPi-Jukebox-RFID seems to be installed${nocolor}"
 	echo -e " "
 else
-	echo -e "${red}RPi-Jukebox-RFID is missing! Please install necessarily.${nocolor}"
+	echo -e "${red}Notice: RPi-Jukebox-RFID is missing!${nocolor}"
 	echo -e " "
 fi
 
-echo -e "Do you want to install this Rotary-Control-Service?"
+echo -e "Do you want to install or remove Rotary-Control-Service?"
 echo -e " "
 options=("Install" "Remove" "Quit")
 
@@ -87,6 +88,8 @@ echo -e -n "   --> Delete Repository:         "
 sudo rm -R ${installPath} > /dev/null 2>&1
 echo -e "${green}Done${nocolor}"
 echo -e ""
+
+echo ${insttype}
 
 if [ "${insttype}" = "i" ]
 then
