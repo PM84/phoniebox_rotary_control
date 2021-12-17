@@ -1,7 +1,7 @@
 #!/bin/bash
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
-#Version: 1.2.0 - 20211218
+#Version: 1.2.1 - 20211218
 #branch="development"
 repo="https://github.com/splitti/phoniebox_rotary_control"
 branch="main"
@@ -116,7 +116,7 @@ echo -e ""
 echo -e "Install packages..."
 
 lineLen=24
-packages=(git python3) 
+packages=(git python3 python3-pip) 
 for p in ${packages[@]}; do
 	i=0
 	echo -n -e "   --> $p:"
@@ -151,11 +151,11 @@ for p in ${lumaPackages[@]}; do
 		let i+=1
 		echo -n -e " "
 	done
-	pipInstalled=`sudo pip3 show ${p}`
+	pipInstalled=`sudo pip3 show ${p}`   > /dev/null 2>&1
 	if [ "$pipInstalled" = "" ]
 	then
 		sudo pip3 install ${p}  > /dev/null 2>&1
-		pipInstalled=`sudo pip3 show ${p}`
+		pipInstalled=`sudo pip3 show ${p}`   > /dev/null 2>&1
 		if [ "$pipInstalled" = "" ]
 		then
 			echo -e "${red}failed${nocolor}"
