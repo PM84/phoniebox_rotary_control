@@ -79,6 +79,17 @@ sudo systemctl disable /etc/systemd/phoniebox_rotary_control.service > /dev/null
 sudo rm /etc/systemd/phoniebox_rotary_control.service > /dev/null 2>&1
 echo -e "${green}Done${nocolor}"
 echo -e ""
+echo -e -n "   --> Remove config-entries:             "
+sudo sed -i 's/search_string/replace_string/' filename
+sudo sed -i '/dtoverlay=rotary-encoder/c\' /boot/config.txt
+sudo sed -i '/dtoverlay=gpio-key/c\' /boot/config.txt
+echo -e "${green}Done${nocolor}"
+echo -e ""
+echo -e -n "   --> Adding config-entries:             "
+echo 'dtoverlay=rotary-encoder,pin_a=23,pin_b=24,relative_axis=1' | sudo tee -a /boot/config.txt > /dev/null 2>&1
+echo 'dtoverlay=gpio-key,gpio=22,keycode=28,label="ENTER"' | sudo tee -a /boot/config.txt > /dev/null 2>&1
+echo -e "${green}Done${nocolor}"
+echo -e ""
 echo -e -n "   --> Delete old Repository:             "
 sudo rm -R ${installPath} > /dev/null 2>&1
 echo -e "${green}Done${nocolor}"
