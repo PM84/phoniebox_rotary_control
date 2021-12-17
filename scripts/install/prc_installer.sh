@@ -12,6 +12,7 @@ cyan="\e[1;36m"
 yellow="\e[1;93m"
 green="\e[1;92m"
 installPath="/home/pi/phoniebox_rotary_control"
+insttype=""
 
 clear
 echo -e "///////////////////////////////////////////////////////////////////////////////////////";
