@@ -1,5 +1,5 @@
 Date: 19.12.2021
-Version: 1.3.10 - 20211219
+Version: 1.3.11 - 20211219
 
 # KY-040 Rotary Encoder Support for Phoniebox
 This service will control the volume of a phoniebox by a KY-040 Rotary Encoder.
@@ -35,10 +35,11 @@ You can use the discord-channel for support: <a href="https://discord.gg/pNNHUaC
 
 
 ## Changelog
-- 19.12.2021 v1.3.10
+- 19.12.2021 v1.3.11
   - adding submodule
   - changing some variables
   - optimizing speed issues
+  - Bug fixing
 - 18.12.2021 v1.2.8
   - Bug fixing
   - Add uninstall

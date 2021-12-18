@@ -2,7 +2,7 @@
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
 #branch="development"
-version="1.3.10 - 20211219"
+version="1.3.11 - 20211219"
 repo="https://github.com/splitti/phoniebox_rotary_control"
 branch="main"
 
@@ -277,7 +277,7 @@ do
         "Start")
 			echo -e " "
             sudo service phoniebox-rotary-control start > /dev/null 2>&1
-            pid=`ps -ef | grep phoniebox_rotary_control.py | grep -v grep | awk '{print $2}'`  > /dev/null 2>&1
+            pid=`ps -ef | grep rotary_volume_control.py | grep -v grep | awk '{print $2}'`  > /dev/null 2>&1
 			if [ -z "${pid}" ]
 			then
 				echo -e "${red}Could not start service... ${nocolor}"
