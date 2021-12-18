@@ -1,7 +1,7 @@
 #!/bin/bash
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
-#Version: 1.2.8 - 20211218
+#Version: 1.3.2 - 20211218
 #branch="development"
 repo="https://github.com/splitti/phoniebox_rotary_control"
 branch="main"
@@ -180,7 +180,7 @@ while [ ${gpioready} = 0 ]; do
 	echo -e "Check your GPIO-Settings:"
 	echo -e "-----------------------------------------------------"
 	echo -e "GPIO CLK:      ${green}${clkgpio}${nocolor}"
-	echo -e "GPIO SW:       ${green}${swgpio}${nocolor}"
+	echo -e "GPIO SK:       ${green}${skgpio}${nocolor}"
 	echo -e "GPIO DT:       ${green}${dtgpio}${nocolor}"
 	echo -e ""
 	options=("GPIO settings are OK" "Let me adjust the settings again" "Quit")
@@ -190,7 +190,7 @@ while [ ${gpioready} = 0 ]; do
 		case $opt in
 			"GPIO settings are OK")
 				overlay1="dtoverlay=rotary-encoder,pin_a=${clkgpio},pin_b=${dtgpio},relative_axis=1"
-				overlay2="dtoverlay=gpio-key,gpio=${swgpio},keycode=28,label=\"ENTER\""
+				overlay2="dtoverlay=gpio-key,gpio=${skgpio},keycode=28,label=\"ENTER\""
 				gpioready=1
 				break
 				;;

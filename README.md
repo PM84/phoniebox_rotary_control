@@ -1,5 +1,5 @@
 Date: 18.12.2021
-Version: 1.2.8 - 20211218
+Version: 1.3.2 - 20211218
 
 # KY-040 Rotary Encoder Support for Phoniebox
 This service will control the volume of a phoniebox by a KY-040 Rotary Encoder.
@@ -22,6 +22,8 @@ Pressing the knob again sets the volume to the boot volume (cf. Phoniebox UI)
 The installation is pretty easy with the one line installer. 
 ![One Line Installer](https://raw.githubusercontent.com/splitti/phoniebox_rotary_control/main/media/prc_install.gif)
 
+You just need the GPIO's of the rotary encoder pins CLK, DT and SW.
+
 Here is the installer:
 > cd; rm prc_installer.sh; wget https://raw.githubusercontent.com/splitti/phoniebox_rotary_control/master/scripts/install/prc_installer.sh; chmod +x prc_installer.sh; ./prc_installer.sh
 
@@ -33,6 +35,10 @@ You can use the discord-channel for support: <a href="https://discord.gg/pNNHUaC
 
 
 ## Changelog
+- 18.12.2021 v1.3.2
+  - adding submodule
+  - changing some variables
+  - optimizing speed issues
 - 18.12.2021 v1.2.8
   - Bug fixing
   - Add uninstall
