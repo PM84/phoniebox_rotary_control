@@ -8,9 +8,9 @@ developed by Peter Mayer
 Tested with these rotary knobs (affiliate Link): <a href="https://amzn.to/33v1UTH" target="_blank">https://amzn.to/33v1UTH</a>
 
 ## One Line Installer
-![One Line Installer](prc_install.gif)
+![One Line Installer](https://raw.githubusercontent.com/splitti/phoniebox_rotary_control/main/media/prc_install.gif)
 <video controls width="250">
-    <source src="/media/prc_install.mp4" type="video/mp4">
+    <source src="https://raw.githubusercontent.com/splitti/phoniebox_rotary_control/main/media/prc_install.mp4" type="video/mp4">
     Sorry, your browser doesn't support embedded videos.
 </video>
 
