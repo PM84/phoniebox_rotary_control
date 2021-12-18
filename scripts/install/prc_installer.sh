@@ -79,9 +79,9 @@ echo -e "///${cyan}   Remove Service:                                           
 echo -e "///////////////////////////////////////////////////////////////////////////"
 echo -e ""
 echo -e -n "   --> Delete Service:            "
-sudo service phoniebox_rotary_control stop > /dev/null 2>&1
-sudo systemctl disable /etc/systemd/phoniebox_rotary_control.service > /dev/null 2>&1
-sudo rm /etc/systemd/phoniebox_rotary_control.service > /dev/null 2>&1
+sudo service phoniebox-rotary-control stop > /dev/null 2>&1
+sudo systemctl disable /etc/systemd/phoniebox-rotary-control.service > /dev/null 2>&1
+sudo rm /etc/systemd/phoniebox-rotary-control.service > /dev/null 2>&1
 echo -e "${green}done${nocolor}"
 echo -e -n "   --> Remove config-entries:     "
 sudo sed -i '/# enable rotary encoder/c\' /boot/config.txt > /dev/null 2>&1
