@@ -1,5 +1,5 @@
-Date: 17.12.2021
-Version: 1.1.0 - 20211217
+Date: 18.12.2021
+Version: 1.2.8 - 20211218
 
 # phoniebox_rotary_control
 phoniebox_rotary_control
@@ -8,6 +8,10 @@ developed by Peter Mayer
 Tested with these rotary knobs (affiliate Link): <a href="https://amzn.to/33v1UTH" target="_blank">https://amzn.to/33v1UTH</a>
 
 ## One Line Installer
+<video controls width="250">
+    <source src="/media/prc_install.mp4" type="video/mp4">
+    Sorry, your browser doesn't support embedded videos.
+</video>
 
 > cd; rm prc_installer.sh; wget https://raw.githubusercontent.com/splitti/phoniebox_rotary_control/master/scripts/install/prc_installer.sh; chmod +x prc_installer.sh; ./prc_installer.sh
 
@@ -17,6 +21,11 @@ You can use the discord-channel for support: <a href="https://discord.gg/pNNHUaC
 
 
 ## Changelog
+- 18.12.2021 v1.2.8
+  - Bug fixing
+  - Add uninstall
+  - Add configuration in installer
+  - Add editing config.txt
 - 17.12.2021 v1.1.0
   - New rotary control
   - Bug fixing

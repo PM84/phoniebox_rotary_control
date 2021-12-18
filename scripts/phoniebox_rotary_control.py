@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 
-
-# 1.1.0
-
 # Codebase from: https://blog.ploetzli.ch/2018/ky-040-rotary-encoder-linux-raspberry-pi/
 # Adapted to Phoniebox Volume Control by Peter Mayer; https://github.com/PM84/phoniebox_helper.git
 
@@ -37,9 +34,13 @@ def getBootVolume():
 def getVolumeStep():
     volStep = os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=getvolstep").read()
     return int(volStep)
+def getMaxVolume():
+    maxVol = os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=getmaxvolume").read()
+    return int(maxVol)
 def setVolume(volume, volume_step):
-    os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=setvolume -v="+str(min(100, max(0, volume + volume_step))))
-    return min(100, max(0, volume + volume_step))
+    maxVol = getMaxVolume()
+    os.system("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=setvolume -v="+str(min(maxVol, max(0, volume + volume_step))))
+    return min(maxVol, max(0, volume + volume_step))
 def MuteUnmuteAudio():
     if readVolume() > 1:
         os.popen("sudo /home/pi/RPi-Jukebox-RFID/scripts/playout_controls.sh -c=mute")
