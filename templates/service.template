@@ -5,7 +5,7 @@ After=network.target iptables.service firewalld.service
 
 [Service]
 WorkingDirectory=<PATH>/scripts/
-ExecStart=/usr/bin/python3 <PATH>/scripts/./phoniebox_rotary_control.py
+ExecStart=/usr/bin/python3 <PATH>/scripts/controller/./rotary_volume_control.py
 Restart=always
 SyslogIdentifier=PhonieboxRotaryControl
 StandardOutput=syslog

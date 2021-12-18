@@ -180,7 +180,7 @@ while [ ${gpioready} = 0 ]; do
 	echo -e "Check your GPIO-Settings:"
 	echo -e "-----------------------------------------------------"
 	echo -e "GPIO CLK:      ${green}${clkgpio}${nocolor}"
-	echo -e "GPIO SK:       ${green}${skgpio}${nocolor}"
+	echo -e "GPIO SW:       ${green}${swgpio}${nocolor}"
 	echo -e "GPIO DT:       ${green}${dtgpio}${nocolor}"
 	echo -e ""
 	options=("GPIO settings are OK" "Let me adjust the settings again" "Quit")
@@ -189,8 +189,8 @@ while [ ${gpioready} = 0 ]; do
 	do
 		case $opt in
 			"GPIO settings are OK")
-				overlay1="dtoverlay=rotary-encoder,pin_a=${skgpio},pin_b=${dtgpio},relative_axis=1"
-				overlay2="dtoverlay=gpio-key,gpio=${clkgpio},keycode=28,label=\"ENTER\""
+				overlay1="dtoverlay=rotary-encoder,pin_a=${clkgpio},pin_b=${dtgpio},relative_axis=1"
+				overlay2="dtoverlay=gpio-key,gpio=${swgpio},keycode=28,label=\"ENTER\""
 				gpioready=1
 				break
 				;;
@@ -232,10 +232,12 @@ echo "${overlay2}" | sudo tee -a /boot/config.txt > /dev/null 2>&1
 echo -e "${green}done${nocolor}"
 echo -e -n "   --> Clone Rotary Repository:      "
 git clone ${repo} --branch ${branch} ${installPath} > /dev/null 2>&1
+git submodule sync > /dev/null 2>&1
+git submodule update --init --recursive > /dev/null 2>&1
 echo -e "${green}done${nocolor}"
 echo -e -n "   --> Installing Service:           "
 sudo chown -R pi:pi ${installPath} > /dev/null 2>&1
-sudo chmod +x ${installPath}/scripts/phoniebox_rotary_control.py> /dev/null
+sudo chmod +x ${installPath}/scripts/controller/rotary_volume_control.py> /dev/null
 sudo cp ${installPath}/templates/service.template /etc/systemd/system/phoniebox-rotary-control.service > /dev/null
 sudo chown root:root /etc/systemd/system/phoniebox-rotary-control.service > /dev/null 2>&1
 sudo chmod 644 /etc/systemd/system/phoniebox-rotary-control.service > /dev/null 2>&1

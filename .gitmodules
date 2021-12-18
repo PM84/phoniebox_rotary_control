@@ -1,0 +1,3 @@
+[submodule "scripts/controller"]
+	path = scripts/controller
+	url = https://github.com/PM84/phoniebox_helper.git
