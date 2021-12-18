@@ -2,7 +2,7 @@ Date: 18.12.2021
 Version: 1.2.8 - 20211218
 
 # KY-040 Rotary Encoder Support for Phoniebox
-This script allows the use of a KY-040 Rotary Encoder with Linux on a Raspberry Pi to control the volume of a Phoniebox (https://github.com/MiczFlor/RPi-Jukebox-RFID).
+This service will control the volume of a phoniebox by a KY-040 Rotary Encoder.
 
 Codebase from: https://blog.ploetzli.ch/2018/ky-040-rotary-encoder-linux-raspberry-pi/
 Adapted to Phoniebox Volume Control by Peter Mayer: https://github.com/PM84/phoniebox_helper.git
