@@ -35,7 +35,7 @@ You can use the discord-channel for support: <a href="https://discord.gg/pNNHUaC
 
 
 ## Changelog
-- 18.12.2021 v1.3.6
+- 18.12.2021 v1.3.9
   - adding submodule
   - changing some variables
   - optimizing speed issues

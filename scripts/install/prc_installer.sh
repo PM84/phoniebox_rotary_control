@@ -2,7 +2,7 @@
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
 #branch="development"
-version="1.3.8 - 20211218"
+version="1.3.9 - 20211218"
 repo="https://github.com/splitti/phoniebox_rotary_control"
 branch="main"
 
@@ -33,7 +33,7 @@ echo -e "///////////////////////////////////////////////////////////////////////
 echo -e "///                                                                                 ///"
 echo -e -n "///${cyan}      Version:  ${version}${nocolor}";
 
-lineLen=68
+lineLen=65
 i=0
 let lLen="$lineLen"-"${#version}"
 while [ "$i" -lt "$lLen" ]
