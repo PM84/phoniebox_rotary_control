@@ -1,10 +1,10 @@
-#1.0.24
+#1.3.10
 [Unit]
 Description=Phoniebox Rotary Control Service
 After=network.target iptables.service firewalld.service
 
 [Service]
-WorkingDirectory=<PATH>/scripts/
+WorkingDirectory=<PATH>/scripts/controller/
 ExecStart=/usr/bin/python3 <PATH>/scripts/controller/./rotary_volume_control.py
 Restart=always
 SyslogIdentifier=PhonieboxRotaryControl
