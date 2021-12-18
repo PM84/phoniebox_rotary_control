@@ -1,7 +1,7 @@
 #!/bin/bash
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
-#Version: 1.3.4 - 20211218
+#Version: 1.3.5 - 20211218
 #branch="development"
 repo="https://github.com/splitti/phoniebox_rotary_control"
 branch="main"
@@ -233,6 +233,7 @@ echo -e "${green}done${nocolor}"
 echo -e -n "   --> Clone Rotary Repository:      "
 git clone ${repo} --branch ${branch} ${installPath} > /dev/null 2>&1
 cd ${installPath} #> /dev/null 2>&1
+ls -asl
 git submodule sync #> /dev/null 2>&1
 git submodule update --init --recursive #> /dev/null 2>&1
 cd - > /dev/null 2>&1
