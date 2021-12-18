@@ -1,8 +1,8 @@
 #!/bin/bash
 # Colors: \e[36m=Cyan M ; \e[92m=Light green ; \e[91m=Light red ; \e[93m=Light yellow ; \e[31m=green ; \e[0m=Default ; \e[33m=Yellow ; \e[31m=Red
 
-#Version: 1.3.6 - 20211218
 #branch="development"
+version="1.3.7 - 20211218"
 repo="https://github.com/splitti/phoniebox_rotary_control"
 branch="main"
 
@@ -31,8 +31,21 @@ echo -e "///${green}                    developed by Peter Mayer & splitti      
 echo -e "///${cyan}                                                                                 ${nocolor}///";
 echo -e "///////////////////////////////////////////////////////////////////////////////////////"
 echo -e "///                                                                                 ///"
-echo -e "///${cyan}      Github:  https://github.com/splitti/phoniebox_rotary_control               ${nocolor}///"
-echo -e "///${cyan}      Support: https://discord.gg/pNNHUaCSAD                                     ${nocolor}///"
+echo -e -n "///${cyan}      Version:  ${version}${nocolor}";
+
+lineLen=24
+i=0
+let lLen="$lineLen"-"${#version}"
+while [ "$i" -lt "$lLen" ]
+do
+	let i+=1
+	echo -n -e " "
+done
+echo -e "///"
+
+echo -e "///${cyan}      Github:   https://github.com/PM84/phoniebox_helper                         ${nocolor}///"
+echo -e "///${cyan}      Github:   https://github.com/splitti/phoniebox_rotary_control              ${nocolor}///"
+echo -e "///${cyan}      Support:  https://discord.gg/pNNHUaCSAD                                    ${nocolor}///"
 echo -e "///                                                                                 ///"
 echo -e "///////////////////////////////////////////////////////////////////////////////////////"
 echo -e ""
