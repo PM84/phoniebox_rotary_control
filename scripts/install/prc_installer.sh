@@ -185,8 +185,8 @@ while [ ${gpioready} = 0 ]; do
 	echo -e "Adjust these values to your needs:"
 	echo -e ""
 	read -rp "  ---> Type CLK-GPIO:  " clkgpio
-	read -rp "  ---> Type SK-GPIO:   " skgpio
 	read -rp "  ---> Type DT-GPIO:   " dtgpio
+	read -rp "  ---> Type SW-GPIO:   " swgpio
 	echo -e ""
 	echo -e ""
 	echo -e "The entered values are not checked for correctness!"
@@ -194,8 +194,8 @@ while [ ${gpioready} = 0 ]; do
 	echo -e "Check your GPIO-Settings:"
 	echo -e "-----------------------------------------------------"
 	echo -e "GPIO CLK:      ${green}${clkgpio}${nocolor}"
-	echo -e "GPIO SK:       ${green}${skgpio}${nocolor}"
 	echo -e "GPIO DT:       ${green}${dtgpio}${nocolor}"
+	echo -e "GPIO SW:       ${green}${swgpio}${nocolor}"
 	echo -e ""
 	options=("GPIO settings are OK" "Let me adjust the settings again" "Quit")
 
@@ -204,7 +204,7 @@ while [ ${gpioready} = 0 ]; do
 		case $opt in
 			"GPIO settings are OK")
 				overlay1="dtoverlay=rotary-encoder,pin_a=${clkgpio},pin_b=${dtgpio},relative_axis=1"
-				overlay2="dtoverlay=gpio-key,gpio=${skgpio},keycode=28,label=\"ENTER\""
+				overlay2="dtoverlay=gpio-key,gpio=${swgpio},keycode=28,label=\"ENTER\""
 				gpioready=1
 				break
 				;;
